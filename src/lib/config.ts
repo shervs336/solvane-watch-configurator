@@ -1,5 +1,5 @@
 // Everything the configurator can change, with prices.
-// Halden is a fictional watchmaker made for this portfolio project.
+// Solvane is a fictional watchmaker made for this portfolio project.
 
 export type Option<Id extends string = string> = {
   id: Id;
@@ -75,7 +75,7 @@ export type WatchConfig = {
 
 export const DEFAULT_CONFIG: WatchConfig = {
   case: "steel",
-  bezel: "fluted",
+  bezel: "polished",
   dial: "midnight",
   indices: "baton",
   accent: "red",

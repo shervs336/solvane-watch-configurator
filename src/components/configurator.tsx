@@ -125,7 +125,7 @@ export function Configurator() {
     const fs = Math.max(14, Math.round(c.width * 0.016));
     ctx.fillStyle = "#2b2620";
     ctx.font = `500 ${fs * 1.6}px Georgia, serif`;
-    ctx.fillText("Halden Fjord", pad, c.height - pad - fs * 1.6);
+    ctx.fillText("Solvane Fjord", pad, c.height - pad - fs * 1.6);
     ctx.font = `${fs}px system-ui, sans-serif`;
     ctx.fillStyle = "#6b6257";
     ctx.fillText(
@@ -135,7 +135,7 @@ export function Configurator() {
     );
     const a = document.createElement("a");
     a.href = c.toDataURL("image/png");
-    a.download = `halden-fjord-${config.case}-${config.dial}.png`;
+    a.download = `solvane-fjord-${config.case}-${config.dial}.png`;
     a.click();
     setToast("Image saved.");
   }
@@ -150,13 +150,13 @@ export function Configurator() {
       >
         <header className="pointer-events-none absolute inset-x-0 top-0 z-10 flex items-start justify-between p-4 sm:p-8">
           <div className="pointer-events-auto">
-            <p className="font-display text-xl tracking-[0.32em] text-ink uppercase sm:text-2xl">Halden</p>
+            <p className="font-display text-xl tracking-[0.32em] text-ink uppercase sm:text-2xl">Solvane</p>
             <p className="mt-1 hidden text-[11px] tracking-[0.25em] text-ink-soft uppercase sm:block">Atelier configurator</p>
           </div>
           <p className="hidden text-right text-[11px] tracking-[0.25em] text-ink-soft uppercase sm:block">
             Fjord · Automatic
             <br />
-            Ref. HF-{config.size}
+            Ref. SF-{config.size}
             {config.case.slice(0, 2).toUpperCase()}
           </p>
         </header>
@@ -220,6 +220,11 @@ export function Configurator() {
           >
             <RotateCcwIcon className="size-3.5" /> Reset to signature build
           </button>
+
+          <p className="mt-8 text-[11px] leading-relaxed text-ink-soft">
+            Solvane is a fictional watchmaker created for a portfolio project. Prices are illustrative and no orders
+            are placed.
+          </p>
         </div>
 
         {/* Summary bar */}

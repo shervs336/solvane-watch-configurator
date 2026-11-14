@@ -1,18 +1,18 @@
-# Halden Fjord: 3D watch configurator
+# Solvane Fjord: 3D watch configurator
 
 **Live site:** https://halden-watch-configurator.vercel.app
 
 Design your own luxury watch in real-time 3D. Pick the case metal, bezel, dial, hour markers, seconds hand, strap and size; the price updates live, the address bar always holds a shareable link to your exact build, and you can save a studio-style image of it.
 
-> Halden is a fictional watchmaker created for this portfolio project. The "Reserve" button doesn't place an order.
+> Solvane is a fictional watchmaker created for this portfolio project. The "Reserve" button doesn't place an order.
 
-![Halden Fjord configurator](docs/thumbnail@2x.png)
+![Solvane Fjord configurator](docs/thumbnail@2x.png)
 
 ## Screenshots
 
 | Signature steel | Rose gold |
 |---|---|
-| ![Steel, fluted bezel, blue dial](docs/screenshots/desktop/01-signature-steel.png) | ![Rose gold, ceramic bezel, salmon dial](docs/screenshots/desktop/02-rose-gold-salmon.png) |
+| ![Steel, polished bezel, blue dial](docs/screenshots/desktop/01-signature-steel.png) | ![Rose gold, ceramic bezel, salmon dial](docs/screenshots/desktop/02-rose-gold-salmon.png) |
 
 | Yellow gold bracelet | Black DLC |
 |---|---|

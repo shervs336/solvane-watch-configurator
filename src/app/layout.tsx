@@ -15,11 +15,11 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Halden Fjord: build your watch in 3D",
+  title: "Solvane Fjord: build your watch in 3D",
   description:
-    "Configure the Halden Fjord automatic in real-time 3D. Choose the case, bezel, dial, hands and strap, then share your build.",
+    "Configure the Solvane Fjord automatic in real-time 3D. Choose the case, bezel, dial, hands and strap, then share your build.",
   openGraph: {
-    title: "Halden Fjord: 3D watch configurator",
+    title: "Solvane Fjord: 3D watch configurator",
     description: "Design your own automatic watch in real-time 3D.",
     type: "website",
   },
