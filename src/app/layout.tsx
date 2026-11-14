@@ -15,6 +15,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  // Absolute base for social preview images. Set explicitly so it never points at an old domain.
+  metadataBase: new URL("https://solvane-watch-configurator.vercel.app"),
   title: "Solvane Fjord: build your watch in 3D",
   description:
     "Configure the Solvane Fjord automatic in real-time 3D. Choose the case, bezel, dial, hands and strap, then share your build.",
