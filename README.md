@@ -1,5 +1,7 @@
 # Halden Fjord: 3D watch configurator
 
+**Live site:** https://halden-watch-configurator.vercel.app
+
 Design your own luxury watch in real-time 3D. Pick the case metal, bezel, dial, hour markers, seconds hand, strap and size; the price updates live, the address bar always holds a shareable link to your exact build, and you can save a studio-style image of it.
 
 > Halden is a fictional watchmaker created for this portfolio project. The "Reserve" button doesn't place an order.

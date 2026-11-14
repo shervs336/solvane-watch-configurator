@@ -3,6 +3,7 @@
 **Role:** Design and development (solo)
 **Type:** Interactive 3D product configurator
 **Stack:** Next.js 16, TypeScript, Tailwind CSS v4, Three.js, React Three Fiber, drei, Vercel
+**Links:** [Live site](https://halden-watch-configurator.vercel.app) · [Code](https://github.com/shervs336/halden-watch-configurator)
 
 ![Halden Fjord configurator](thumbnail@2x.png)
 
