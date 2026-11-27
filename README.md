@@ -14,9 +14,9 @@ Design your own luxury watch in real-time 3D. Pick the case metal, bezel, dial, 
 |---|---|
 | ![Steel, polished bezel, blue dial](docs/screenshots/desktop/01-signature-steel.png) | ![Rose gold, ceramic bezel, salmon dial](docs/screenshots/desktop/02-rose-gold-salmon.png) |
 
-| Yellow gold bracelet | Black DLC |
-|---|---|
-| ![Yellow gold with bracelet](docs/screenshots/desktop/03-yellow-gold-bracelet.png) | ![Black DLC with rubber strap](docs/screenshots/desktop/05-black-dlc.png) |
+| Yellow gold bracelet | Black DLC | AR view |
+|---|---|---|
+| ![Yellow gold with bracelet](docs/screenshots/desktop/03-yellow-gold-bracelet.png) | ![Black DLC with rubber strap](docs/screenshots/desktop/05-black-dlc.png) | ![The build in 3D with a QR code for AR](docs/screenshots/desktop/08-ar-view.png) |
 
 | Dial close-up | Crown profile | Caseback |
 |---|---|---|
@@ -36,6 +36,10 @@ The case study is in [`docs/case-study.md`](docs/case-study.md).
 - **Camera presets:** ¾ view, front, dial close-up, crown profile and caseback, with smooth transitions. The camera also jumps to the most useful view when you change the dial, hands or strap.
 - **Shareable builds:** every change updates the URL (`?case=rose&dial=salmon…`), and opening that link restores the exact watch.
 - **Save image:** exports the current view as a PNG on a studio backdrop with a caption.
+- **See it in your space (AR):**
+  - The current build is exported in the browser to a binary glTF (Three.js GLTFExporter) at its real size, about 4.5 cm.
+  - It's shown with Google's `<model-viewer>`, which places it with WebXR on ARCore Android phones and with Quick Look on iPhone (converting to USDZ on the device).
+  - On a computer, a QR code opens the same build straight into AR on a phone.
 - **Mobile layout:** on phones the 3D view stays pinned at the top while the options scroll underneath.
 - **Accessible:** the option buttons are real buttons with `aria-pressed` and labels that include price, everything is keyboard operable, and reduced motion is respected.
 

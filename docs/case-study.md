@@ -64,6 +64,15 @@ The goal was a configurator that feels like a luxury brand's site, built for $0 
 
 ## What I'd do next
 
-- **AR "try it on":** export the current build to glTF and show it with `<model-viewer>` in AR on phones.
 - **Engraving:** render custom text on the caseback.
 - **Mobile performance:** load a lighter model first, then swap in full detail once it's idle.
+
+## Added later: AR view
+
+**See it in your space** exports the exact build to a binary glTF in the browser and opens it in `<model-viewer>`:
+- **Real size:** the export is a clone of the scene graph, scaled so the watch is about 4.5 cm across, centered and resting on the floor plane. AR shows it as big as a real watch.
+- **No server, no files:** the GLB is a blob URL. Android uses WebXR, and iPhone uses Quick Look, with model-viewer converting the glTF to USDZ on the device. The Scene Viewer app is left out because it can't open blob URLs.
+- **From desktop to phone:** desktops can't do AR, so the dialog shows a QR code of the build's link with `?ar=1`, which opens the AR view straight away on the phone.
+- **Checked:** the exported model passes the Khronos glTF validator with no errors or warnings. Placing it in AR needs a real phone; that part is untested here.
+
+![AR view](screenshots/desktop/08-ar-view.png)
