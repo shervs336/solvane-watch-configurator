@@ -2,6 +2,7 @@
 
 import { useEffect, useImperativeHandle, useRef, useState, type Ref } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Box3, Vector3 } from "three";
 
 const WATCH_ROOT = "watch-root";
 import { CameraControls, ContactShadows, Environment, Lightformer } from "@react-three/drei";
@@ -11,7 +12,7 @@ import { VIEW_POSES, type SceneApi, type ViewId } from "@/lib/views";
 
 function Rig({ apiRef, onInteract, ready }: { apiRef: Ref<SceneApi>; onInteract: () => void; ready: boolean }) {
   const controls = useRef<CameraControls>(null);
-  const { gl, size } = useThree();
+  const { gl, size, scene } = useThree();
   // On tall/narrow screens, step the camera back so the whole watch fits.
   const fit = size.width / size.height < 0.9 ? 1.45 : 1;
 
@@ -23,6 +24,30 @@ function Rig({ apiRef, onInteract, ready }: { apiRef: Ref<SceneApi>; onInteract:
   useImperativeHandle(apiRef, () => ({
     setView: (id) => go(id),
     capture: () => gl.domElement.toDataURL("image/png"),
+    exportGlb: async () => {
+      const root = scene.getObjectByName(WATCH_ROOT);
+      // The root stays hidden until its shaders compile; until then there's nothing to export.
+      if (!root || !root.visible) throw new Error("The watch isn't ready yet.");
+      // Clone at real size: the case is about 41 mm across, so AR shows it as big as a real watch.
+      const copy = root.clone(true);
+      copy.position.set(0, 0, 0);
+      copy.rotation.set(0, 0, 0);
+      copy.scale.set(1, 1, 1);
+      copy.visible = true;
+      copy.updateMatrixWorld(true);
+      const box = new Box3().setFromObject(copy);
+      const dims = box.getSize(new Vector3());
+      const k = 0.045 / Math.max(dims.x, dims.y, dims.z);
+      copy.scale.setScalar(k);
+      copy.updateMatrixWorld(true);
+      const scaled = new Box3().setFromObject(copy);
+      const center = scaled.getCenter(new Vector3());
+      // Centered, resting on the floor plane.
+      copy.position.set(-center.x, -scaled.min.y, -center.z);
+      const { GLTFExporter } = await import("three/examples/jsm/exporters/GLTFExporter.js");
+      const result = await new GLTFExporter().parseAsync(copy, { binary: true, onlyVisible: true, maxTextureSize: 2048 });
+      return new Blob([result as ArrayBuffer], { type: "model/gltf-binary" });
+    },
   }));
 
   useEffect(() => {

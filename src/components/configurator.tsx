@@ -1,8 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import { CheckIcon, DownloadIcon, LinkIcon, RotateCcwIcon } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { BoxIcon, CheckIcon, DownloadIcon, LinkIcon, RotateCcwIcon } from "lucide-react";
+import { ArDialog } from "@/components/ar-dialog";
 import {
   ACCENTS,
   BEZELS,
@@ -66,6 +67,20 @@ export function Configurator() {
   const [toast, setToast] = useState<string | null>(null);
   const [hinted, setHinted] = useState(false);
   const scene = useRef<SceneApi>(null);
+  // ?ar=1 (from the QR code shown on desktop) opens the AR view straight away.
+  const [arOpen, setArOpen] = useState(() => typeof window !== "undefined" && new URLSearchParams(window.location.search).get("ar") === "1");
+  const exportGlb = useCallback(async () => {
+    // The scene may still be loading (e.g. arriving from the QR code): wait for it.
+    for (let i = 0; i < 60; i++) {
+      try {
+        if (scene.current) return await scene.current.exportGlb();
+      } catch (e) {
+        if (!String((e as Error).message).includes("isn't ready")) throw e;
+      }
+      await new Promise((r) => setTimeout(r, 500));
+    }
+    throw new Error("The 3D model took too long to load. Try again.");
+  }, []);
 
   // Keep the address bar in sync, so it's always a shareable link.
   useEffect(() => {
@@ -243,6 +258,9 @@ export function Configurator() {
               <IconButton label="Save image of this view" onClick={saveImage}>
                 <DownloadIcon className="size-4" />
               </IconButton>
+              <IconButton label="View in your space (3D and AR)" onClick={() => setArOpen(true)}>
+                <BoxIcon className="size-4" />
+              </IconButton>
             </div>
           </div>
           <button
@@ -254,6 +272,14 @@ export function Configurator() {
           </button>
           <p className="mt-2 text-center text-[11px] text-ink-soft">Complimentary engraving · 5-year warranty · Ships in 6 weeks</p>
         </div>
+
+        <ArDialog
+          open={arOpen}
+          onClose={() => setArOpen(false)}
+          exportGlb={exportGlb}
+          shareUrl={typeof window === "undefined" ? "" : `${window.location.origin}${window.location.pathname}${toSearch(config)}`}
+          title={`Solvane Fjord in ${pick("case", config.case).name}`}
+        />
 
         <div aria-live="polite" className="pointer-events-none absolute inset-x-0 bottom-36 flex justify-center px-6">
           {toast && (

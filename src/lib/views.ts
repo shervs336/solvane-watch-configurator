@@ -23,4 +23,6 @@ export const VIEW_POSES: Record<ViewId, [number[], number[]]> = {
 export type SceneApi = {
   setView: (id: ViewId) => void;
   capture: () => string; // PNG data URL of the current view
+  /** The current build as a binary glTF, at real-world size in meters (for AR). */
+  exportGlb: () => Promise<Blob>;
 };
